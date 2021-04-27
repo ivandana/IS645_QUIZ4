@@ -6,6 +6,7 @@ require('dotenv').config();
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
+
 app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({ extended: false }));
 
@@ -14,7 +15,6 @@ const pool=new Pool({
     ssl:{
         rejectUnauthorized:false
     }
-  
 });
 
 const sql_create = `CREATE TABLE IF NOT EXISTS Books (
@@ -24,11 +24,11 @@ const sql_create = `CREATE TABLE IF NOT EXISTS Books (
     Comments TEXT
   );`;
   
-  pool.query(sql_create, [], (err, result) => {
+pool.query(sql_create, [], (err, result) => {
     if (err) {
       return console.error(err.message);
     }
-    console.log("Successful creation of the 'Books' table");
+console.log("Successful creation of the 'Books' table");
 
 
 const sql_insert = `INSERT INTO Books (Book_ID, Title, Author, Comments) VALUES
